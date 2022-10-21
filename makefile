@@ -10,5 +10,5 @@ OUT_BUF=$(FILE)
 FLAGS=-o
 
 $(BUILD_DIR)/$(OUT): $(SRC_DIR)/$(FILE)
-	$(COMPILER) $(SRC_DIR)/$(FILE) $(FLAGS) $(BUILD_DIR)/$(OUT)
+	$(COMPILER) -std=c++17 $(SRC_DIR)/$(FILE) $(FLAGS) $(BUILD_DIR)/$(OUT)
 
