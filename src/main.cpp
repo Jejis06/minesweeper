@@ -3,24 +3,37 @@
 #include <stack>
 #include <cstdlib>
 #include <utility>
-#include <termios.h>
-#include <unistd.h>
+
+#ifdef __unix__    
+	#include <termios.h>
+	#include <unistd.h>
+
+	#define CLEAR system("clear");
+
+	int getch(void)
+	{
+		struct termios oldattr, newattr;
+		int ch;
+		tcgetattr( STDIN_FILENO, &oldattr );
+		newattr = oldattr;
+		newattr.c_lflag &= ~( ICANON | ECHO );
+		tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
+		ch = getchar();
+		tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
+		return ch;
+	}
+
+#elif defined(_WIN32) || defined(WIN32)    
+    #include <conio.h>
+	#include <ctime>
+	#define CLEAR system("cls");
+
+#endif
 
 using namespace std;
 
 //windows stupid
-int getch(void)
-{
-    struct termios oldattr, newattr;
-    int ch;
-    tcgetattr( STDIN_FILENO, &oldattr );
-    newattr = oldattr;
-    newattr.c_lflag &= ~( ICANON | ECHO );
-    tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
-    ch = getchar();
-    tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
-    return ch;
-}
+
 
 class Board {
 		
@@ -211,7 +224,7 @@ class Board {
 		}
 		//visuals
 		void Frame(){
-			system("clear");
+			CLEAR
 
 			if (won && !lost){
 				if(freed == 0) complete_board(); 
@@ -273,8 +286,8 @@ class Board {
 		}
 		void allmines(){
 			while(MINES.size()){
-				auto [y,x] = MINES.top();
-				mask[y][x] = 1;
+				t = MINES.top();
+				mask[t.first][t.second] = 1;
 				MINES.pop();
 			}
 		}			
@@ -292,8 +305,8 @@ class Board {
 			if(map[y][x] == -1) return -1;
 			auto combinations = combs(y,x);
 			for(int i=0;i<8;i++){
-				auto[yy,xx] = combinations[i];
-				if (map[yy][xx] == -1) val++;
+				pair<int,int> t = combinations[i];
+				if (map[t.first][t.second] == -1) val++;
 			}
 			return val;
 		}
@@ -321,8 +334,8 @@ class Board {
 
 				
 				for(int j=0;j<visited.size();j++){
-					auto [cy,cx] = (visited[j]);
-					if(cy == y && cx == x){
+					t = (visited[j]);
+					if(t.first == y && t.second == x){
 						i--;
 						skip = true;
 					}
@@ -388,7 +401,7 @@ class Board {
 		int mvs=0;
 
 		bool first_mv=true;
-
+		pair<int,int> t;//temp
 		//style
 
 		string sep = " ";
