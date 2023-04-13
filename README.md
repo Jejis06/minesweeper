@@ -59,7 +59,10 @@ g++ src/main.cpp -o saper
 <br>
 
 ## GUI
+<br>
+> The colors used by the program are imported from your terminal's default colors
 
+<br>
 ```c++
  |  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  | 
  |                            Saper                             |  <----  Title screen
@@ -92,9 +95,12 @@ g++ src/main.cpp -o saper
 
 > I made this section only to show what the mine counter shows other labels are just so it doesn't look so bland
 
+
+
 <br>
 
 ## Project Screenshots:
 
 <p align="center"><img src="./src/images/big.png" alt="screenshot"></p>
 
+> Screenshot was made in my terminal (I love gruvbox)
