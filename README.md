@@ -10,7 +10,7 @@ Saper coded in C++ and made to work in a terminal out of my passion for the game
 
 > Libraries used :
 >
-> ostream, vector, stack, cstdlib, map, utility, termios.h, unistd.h, conio.h, ctime
+> iostream, vector, stack, cstdlib, map, utility, termios.h, unistd.h, conio.h, ctime
 
 
 
