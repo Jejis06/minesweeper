@@ -59,10 +59,8 @@ g++ src/main.cpp -o saper
 <br>
 
 ## GUI
-<br>
 > The colors used by the program are imported from your terminal's default colors
 
-<br>
 ```c++
  |  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  | 
  |                            Saper                             |  <----  Title screen
