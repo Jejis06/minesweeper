@@ -2,6 +2,7 @@
 #include <vector>
 #include <stack>
 #include <cstdlib>
+#include <map>
 #include <utility>
 
 #ifdef __unix__    
@@ -123,24 +124,28 @@ class Board {
 			cout <<sep <<frame_char << sep;
 			cout << END << '\n';
 		}
-		void process_move(char cmd){
-			if (cmd == layout[0]){// Left
+
+		void process_move(char in){
+			if(CONTROLS.count(in) == 0) return;
+			short cmd = CONTROLS.at(in);
+
+			if (cmd == LEFT){// Left
 				cursor_x = (cursor_x - 1) > 0?(cursor_x - 1):1;
 				return;
 			}
-			else if (cmd == layout[1]){// Down
+			else if (cmd == DOWN){// Down
 				cursor_y = (cursor_y + 1) > h?h:(cursor_y + 1);
 				return;
 			}
-			else if (cmd == layout[2]){// Up
+			else if (cmd == UP){// Up
 				cursor_y = (cursor_y - 1) > 0?(cursor_y - 1):1;
 				return;
 			}
-			else if (cmd == layout[3]){// Right
+			else if (cmd == RIGHT){// Right
 				cursor_x = (cursor_x + 1) > w?w:(cursor_x + 1);
 				return;
 			}
-			else if (cmd == layout[4]){// flag 
+			else if (cmd == FLAG){// flag 
 				if (mask[cursor_y][cursor_x] == 2){
 					mask[cursor_y][cursor_x] = 0;
 					flags--;
@@ -150,16 +155,13 @@ class Board {
 					mask[cursor_y][cursor_x] = 2; 	
 				}
 			}
-			else if (cmd == layout[5]){// reveal
+			else if (cmd == CHECK){// reveal
 				if (first_mv){
 					mines();
 					setall();
 					first_mv = false;
 				}
 				reveal(cursor_y,cursor_x);
-			}
-			else{// Nothing
-				return;
 			}
 			if (freed == w*h-dens) won = true;
 
@@ -368,24 +370,17 @@ class Board {
 			
 		}
 		//constructor destructor
-		Board(int ww, int hh, int d, const char* l,  int prc=false){
-
-			w = ww;
-			h = hh;
-			layout = l;
-			
-			dens = d;		
-			if (prc) dens = int(float((hh*ww)/100 * d) * 100);
-			
+		Board(int w, int h, int dens, int prc=false): 
+			w(w), h(h), dens(dens)
+		{
+			if (prc) dens = int(float((h*w)/100 * dens) * 100);
 			init();
-				
 		}
 		~Board(){
 			delete[] map;
 		}
 
 	private:
-		const char* layout="hjklfr";//"aswdfr";//hjklfr for vim movement
 		int bounds=1;
 		int w,h;
 		int dens;
@@ -402,8 +397,32 @@ class Board {
 
 		bool first_mv=true;
 		pair<int,int> t;//temp
-		//style
 
+		short LEFT =	1,
+		      DOWN =	2,
+		      UP =	3,
+		      RIGHT =	4,
+		      FLAG =	5,
+		      CHECK =	6;
+
+		::map<char,short> CONTROLS = {
+			{'h',LEFT},
+			{'j',DOWN},
+			{'k',UP},
+			{'l',RIGHT},
+
+			{'a',LEFT},
+			{'s',DOWN},
+			{'w',UP},
+			{'d',RIGHT},
+
+			{'r',CHECK},
+			{'f',FLAG}
+
+		};
+
+		//style
+		
 		string sep = " ";
 
 		string hidden = "_";	
@@ -445,14 +464,8 @@ class Board {
 
 int main(){
 	int w,h,d;
-	bool choice;
-	
-	const char* vim_layout="hjklfr";
-	const char* basic_layout="aswdfr";
 
 	cout << "Saper\n";
-	cout << "Chose layout (basic/vim) (0/1) : ";
-	cin >> choice;
 	cout << "recomended settings w:20 h:20 b:160 | w:10 h:10 b:20\n";
 	cout << "width : ";
 	cin >> w;
@@ -461,7 +474,7 @@ int main(){
 	cout << "bombs : ";
 	cin >> d;
 	// nice lvls 10x10/30 | 20x20/120 | 10x20/70
-	Board brd(w,h,d,(choice)?vim_layout:basic_layout);
+	Board brd(w,h,d);
 //	brd.allmines();
 	brd.Input();
 }
