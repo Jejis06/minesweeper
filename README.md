@@ -4,7 +4,17 @@
 
 <br>
 
+Saper coded in C++ and made to work in a terminal out of my passion for the game. Works on LINUX and WINDOWS.
 
+
+
+> Libraries used :
+>
+> ostream, vector, stack, cstdlib, map, utility, termios.h, unistd.h, conio.h, ctime
+
+
+
+<br>
 
 ##  Installation Steps:
 
@@ -87,3 +97,4 @@ g++ src/main.cpp -o saper
 ## Project Screenshots:
 
 <p align="center"><img src="./src/images/big.png" alt="screenshot"></p>
+
