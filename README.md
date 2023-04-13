@@ -86,4 +86,4 @@ g++ src/main.cpp -o saper
 
 ## Project Screenshots:
 
-<p align="center"><img src="./images/big.png" alt="screenshot"></p>
+<p align="center"><img src="./src/images/big.png" alt="screenshot"></p>
