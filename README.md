@@ -4,7 +4,7 @@
 
 <br>
 
-Saper coded in C++ and made to work in a terminal out of my passion for the game. Works on LINUX and WINDOWS.
+Minesweepe coded in C++ and made to work in a terminal out of my passion for the game. Works on LINUX and WINDOWS.
 
 
 
@@ -63,7 +63,7 @@ g++ src/main.cpp -o saper
 
 ```c++
  |  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  | 
- |                            Saper                             |  <----  Title screen
+ |                        Minesweeper                           |  <----  Title screen
  |  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  | 
  |  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  | 
  |  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  | 

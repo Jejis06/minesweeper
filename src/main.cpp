@@ -432,7 +432,7 @@ class Board {
 		string frame_char = "|";
 		string ver_frame_char="-";
 
-		string title="Saper";
+		string title="Minesweeper";
 		
 		string START = "\e[";
 		string END = "\e[0m";
