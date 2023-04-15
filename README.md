@@ -10,7 +10,7 @@ Minesweeper coded in C++ and made to work in a terminal out of my passion for th
 
 > Libraries used :
 >
-> iostream, vector, stack, cstdlib, map, utility, termios.h, unistd.h, conio.h, ctime
+> iostream, vector, stack, cstdlib, map, utility, termios.h(linux), unistd.h(linux), conio.h(win), ctime(win)
 
 
 
@@ -22,19 +22,19 @@ Minesweeper coded in C++ and made to work in a terminal out of my passion for th
 
 
 ```bash
- git clone https://github.com/Jejis06/saper.git && cd saper
+ git clone https://github.com/Jejis06/minesweeper.git && cd minesweeper 
 ```
 
 2. Compile the game
 
 ```bash
-g++ src/main.cpp -o saper
+g++ src/main.cpp -o minesweeper 
 ```
 
 3. Run it
 
 ```bash
-./saper
+./minesweeper
 ```
 
 <br>
